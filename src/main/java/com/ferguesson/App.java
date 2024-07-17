@@ -1,10 +1,7 @@
 package com.ferguesson;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import java.util.Scanner;
 
 /**
  * Hello world!
@@ -25,20 +22,68 @@ public class App {
 
     public static String calc(String input) throws Exception {
         if (input.isEmpty()) {
-            System.out.println("Invalid input");
+            System.out.println("Empty input");
             throw new Exception();
         }
 
         String[] params = input.split(" ");
 
         if (params.length != 3) {
-            System.out.println("Invalid input");
+            System.out.println("Invalid number of parameters");
             throw new Exception();
         }
 
+        int operand1;
+        int operand2;
+        String operator = params[1];
 
-        String result = params.toString();
+        try {
+            operand1 = Integer.parseInt(params[0]);
+            operand2 = Integer.parseInt(params[2]);
+        }
+        catch (Exception e) {
+            System.out.println("Operands must be integers");
+            throw new Exception();
+        }
 
+        if ((operand1 < 1 || operand1 > 10) && (operand2 < 1 || operand2 > 10)) {
+            System.out.println("Both operands are not between 1 and 10");
+            throw new Exception();
+        }
+
+        if (operand1 < 1 || operand1 > 10) {
+            System.out.println("First operand is not between 1 and 10");
+            throw new Exception();
+        }
+
+        if (operand2 < 1 || operand2 > 10) {
+            System.out.println("Second operand is not between 1 and 10");
+            throw new Exception();
+        }
+
+        String result;
+        int arithmetic;
+
+        switch (operator) {
+            case "+":
+                arithmetic = operand1 + operand2;
+                break;
+            case "-":
+                arithmetic = operand1 - operand2;
+                break;
+            case "*":
+                arithmetic = operand1 * operand2;
+                break;
+            case "/":
+                arithmetic = operand1 / operand2;
+                break;
+
+            default:
+                System.out.println("Invalid operator");
+                throw new Exception();
+        }
+
+        result = Integer.toString(arithmetic);
         return result;
     }
 }
